@@ -2,14 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using HenchMan.Libs.Giphy;
-using HenchMan.Libs.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace HenchMan
+namespace HenchMan.Libs
 {
     public class Startup
     {
@@ -17,10 +15,7 @@ namespace HenchMan
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc();
-            services.AddSingleton<IGiphyServices, GiphyServices>();
-            services.AddSingleton<IGetRandomGif, GetRandomGif>();
-        }       
+        }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
@@ -30,12 +25,10 @@ namespace HenchMan
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseMvc();
-
-            //app.Run(async (context) =>
-            //{
-            //    await context.Response.WriteAsync("Hello World!");
-            //});
+            app.Run(async (context) =>
+            {
+                await context.Response.WriteAsync("Hello World!");
+            });
         }
     }
 }
